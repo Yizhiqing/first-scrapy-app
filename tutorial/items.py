@@ -11,4 +11,7 @@ import scrapy
 class TutorialItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    house_name = scrapy.Field()
+    address = scrapy.Field()
+    transport = scrapy.Field()
     pass
