@@ -6,6 +6,10 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 from scrapy import signals
 from scrapy.contrib.exporter import CsvItemExporter
+from scrapy.contrib.pipeline.images import ImagesPipeline
+from scrapy.exceptions import DropItem
+from scrapy.http import Request
+
 
 class TutorialPipeline(object):
     @classmethod

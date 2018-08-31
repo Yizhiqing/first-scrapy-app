@@ -14,4 +14,5 @@ class TutorialItem(scrapy.Item):
     house_name = scrapy.Field()
     address = scrapy.Field()
     transport = scrapy.Field()
-    pass
+    image_urls = scrapy.Field()
+    images = scrapy.Field()

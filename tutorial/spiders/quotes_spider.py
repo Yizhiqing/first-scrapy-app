@@ -1,4 +1,5 @@
 import scrapy
+from tutorial.items import TutorialItem
 
 
 class QuotesSpider(scrapy.Spider):
@@ -13,6 +14,7 @@ class QuotesSpider(scrapy.Spider):
                 'house_name': quote.css('.cassetteitem_content-title::text').extract_first(),
                 'address': quote.css('.cassetteitem_detail-col1::text').extract_first(),
                 'transport': quote.css('.cassetteitem_detail-col2 > div.cassetteitem_detail-text::text').extract_first(),
+                'image_urls': [quote.css('.cassetteitem_object-item > img::attr(rel)').extract_first()],
             }
 
         next_page = response.css(
