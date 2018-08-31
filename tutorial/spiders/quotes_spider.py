@@ -4,17 +4,18 @@ import scrapy
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
     start_urls = [
-        'http://quotes.toscrape.com/page/1/',
+        'https://suumo.jp/chintai/tokyo/ek_25620/?po1=25&et=15&vos=op4031yhsstw012000000zzz_01x0013524-xb_kwd-305533245293:cr-283516076133:sl-:adg-49440702132:cam-351122192&ipao9700=YSS&ipao9701=b&ipao9702=%E8%B3%83%E8%B2%B8%20%E6%9D%B1%E4%BA%AC%E9%A7%85&ipao9703=c&ipao9704=283516076133&ipao9721=kwd-305533245293&ipao9722=351122192&ipao9723=49440702132&ipao9727=&gclid=CLiSuo-ml90CFQfQvAodvFcHLw&gclsrc=ds&dclid=CIfoyo-ml90CFQJ5vQodt0YPyA',
     ]
 
     def parse(self, response):
-        for quote in response.css('div.quote'):
+        for quote in response.css('div.cassetteitem'):
             yield {
-                'text': quote.css('span.text::text').extract_first(),
-                'author': quote.css('span small::text').extract_first(),
-                'tags': quote.css('div.tags a.tag::text').extract(),
+                'house_name': quote.css('.cassetteitem_content-title::text').extract_first(),
+                'address': quote.css('.cassetteitem_detail-col1::text').extract_first(),
+                'transport': quote.css('.cassetteitem_detail-col2 > div.cassetteitem_detail-text::text').extract_first(),
             }
 
-        next_page = response.css('li.next a::attr(href)').extract_first()
+        next_page = response.css(
+            '#js-leftColumnForm > div.pagination_set > div.pagination.pagination_set-nav > p > a::attr(href)').extract_first()
         if next_page is not None:
-            yield response.follow(next_page, callback=self.parse)
+            yield response.follow('https://suumo.jp' + next_page, callback=self.parse)
