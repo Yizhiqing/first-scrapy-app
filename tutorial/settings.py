@@ -66,6 +66,7 @@ ROBOTSTXT_OBEY = True
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'tutorial.pipelines.TutorialPipeline': 300,
+   'tutorial.pipelines.DatabasePipeline': 300,
    'scrapy.pipelines.images.ImagesPipeline': 300,
 }
 IMAGES_STORE = 'images'
