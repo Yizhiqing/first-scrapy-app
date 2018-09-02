@@ -82,7 +82,7 @@ class DatabasePipeline(object):
             item.get('address',''),
             item.get('transport','')
         ))
-        print '------------------------'
-        print 'Data Stored in Database'
-        print '------------------------'
+        print('------------------------')
+        print('Data Stored in Database')
+        print('------------------------')
         self.con.commit()                    
